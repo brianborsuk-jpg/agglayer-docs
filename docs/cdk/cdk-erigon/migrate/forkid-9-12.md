@@ -35,7 +35,7 @@ The table below lists the CDK Fork ID 9 components and the new CDK FEP Fork ID 1
 | **CDK Components**                         | **Fork ID 9**                                                                                                                                            | **CDK Components**                         | **Fork ID 12**                                                                                                            |
 |--------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------|---------------------------------------------------------------------------------------------------------------------------|
 | CDK Validium node<br>Sequence sender<br>Aggregator | [0.6.7+cdk.1](https://hub.docker.com/layers/0xpolygon/cdk-validium-node/0.6.7-cdk.1/images/sha256-dafb15f9355331b4b7174f47ac416b275915ff24a9ed89c211c7c15c8adfc6b8?context=explore) | CDK Erigon RPC & CDK node                 | [cdk-erigon:v2.1.x](https://github.com/0xPolygonHermez/cdk-erigon/releases) |
-|                                            |                                                                                                                   | CDK node<br>Sequence sender<br>Aggregator | [cdk:v0.3.x](https://github.com/0xPolygonHermez/cdk-erigon/releases)                                                                                                                 |
+|                                            |                                                                                                                   | Aggkit<br>Aggsender | [aggkit:v0.5.x](https://github.com/agglayer/aggkit/releases)                                                                                                                 |
 | Tx pool manager                            | [zkevm-pool-manager](https://github.com/0xPolygon/zkevm-pool-manager)                                                                                    | Tx pool manager                            | [zkevm-pool-manager](https://github.com/0xPolygon/zkevm-pool-manager) use latest tag                                                   |
 | Prover                                     | [v6.0.0](https://github.com/0xPolygonHermez/zkevm-prover/releases/tag/v6.0.0)                                                                            | Prover                                     | [zkevm-prover v8.0.0-RC14](https://hub.docker.com/r/hermeznetwork/zkevm-prover/tags)                                                                            |
 | CDK data availability                      | [v0.0.7](https://hub.docker.com/layers/0xpolygon/cdk-data-availability/0.0.7/images/sha256-17590789a831259d7a07d8a042ea87e381c5708dec3a7daef6f3f782f50b2c00?context=explore) | CDK data availability                      | [cdk-data-availability](https://github.com/0xPolygon/cdk-data-availability) use latest tag                                       |
@@ -54,9 +54,8 @@ The Implementation Provider must prepare in advance for the upgrade to ensure a 
     - Ensure all (majority) of the network batches are verified before starting the upgrade process, otherwise there will be additional downtime as we wait for the network to be ready.
 4. Setting up your CDK Erigon node.
     - Please see the [cdk-erigon readme](https://github.com/0xPolygonHermez/cdk-erigon/blob/v1.0.3/README.md) for information on prereqs, configuration files and running cdk-erigon.
-5. Required CDK-Node pre syncing.
-   - Run CDK-Node aggregator component in sync only mode in advance to populate its database.
-   - Run CDK-Node l1infotreesync component in advance to populate the sequence sender database.
+5. Required Aggkit pre syncing.
+   - Run Aggkit l1infotreesync component in advance to populate the database.
 7. Required Erigon pre-syncing:
     - Generate data stream files from the current `cdk-validium-node` database.
         - Tool and instructions can be found here:  
@@ -177,7 +176,7 @@ go run ./zk/debug_tools/datastream-host \
 7. Start the Pool Manager (if used/needed).
 8. Start CDK-Erigon RPCs (if used/needed).
 9. Start the Bridge.
-10. Start the CDK aggregator and Sequence Sender components.
+10. Start the Aggkit aggsender component.
 11. Start the stateless Prover.
 
 ### Polygon Steps for CDK Chains Attached to the Agglayer
